@@ -1,0 +1,159 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+int m;
+class Student
+{
+//protected:
+    
+
+public:
+int roll;
+    string username;
+
+    Student() {}
+    Student(string username, int roll)
+    {
+        this->username = username;
+        this->roll = roll;
+    }
+};
+
+class Module : public Student
+{
+public:
+    void calender();
+    void faculty();
+    void scorecard();
+    void ise();
+};
+void homepage();
+void login()
+{
+    string username;
+    int roll;
+    system("CLS");
+    cout << "----------------------------------" << endl;
+    cout << "\t E D U P L U S" << endl;
+    cout << "----------------------------------" << endl;
+    cout << "Username : ";
+    cin >> username;
+    cout << "RollNumber : ";
+    cin >> roll;
+    m=roll;
+    Student s1(username, roll);
+    system("CLS");
+    homepage();
+}
+void Module ::calender()
+{
+    ifstream infile("calender.txt");
+    string line;
+    while (getline(infile, line))
+    {
+        cout << line << endl;
+    }
+    infile.close();
+    cout << "\n\n\n";
+    homepage();
+}
+void Module ::faculty()
+{
+    ifstream infile("faculty.txt");
+    string line;
+    while (getline(infile, line))
+    {
+        cout << line << endl;
+    }
+    infile.close();
+    cout << "\n\n\n";
+    homepage();
+}
+void Module ::ise()
+{
+    int t = time(0);
+    srand(t);
+    cout << "-------------------------------------------------" << endl;
+    cout << " \tSUBJECT \t\t MARKS" << endl;
+    cout << "-------------------------------------------------" << endl;
+    cout << " Object Oriented Prog. \t \t " << 1 + rand() % 10 << endl;
+    cout << " Discrete Mathematics \t \t " << 1 + rand() % 10 << endl;
+    cout << " Basic Electronics Engg\t \t " << 1 + rand() % 10 << endl;
+    cout << " Physics for Engineers \t \t " << 1 + rand() % 10 << endl;
+    cout << " Statistical Methods \t \t " << 1 + rand() % 10 << endl;
+    cout << "\n\n\n";
+    homepage();
+}
+void Module :: scorecard()
+{
+    ifstream infile("scorecard.txt");
+    int line_no=m;
+   //cout<<"enter Line Number"<<endl;
+   //cin>>line_no;
+    int counter=0;
+    string line;
+    while (!infile.eof()){
+        counter++;
+        getline(infile, line);
+        if (counter == m)
+        break;
+    }
+    cout<<line<<endl;
+    infile.close();
+    cout << "\n\n\n";
+    homepage();
+}
+void homepage()
+{
+    int module;
+    Module o1;
+    cout << "-------------------------------" << endl;
+    cout << "\t H O M E P A G E  " << endl;
+    cout << "-------------------------------" << endl;
+    cout << "1. Academic Calender" << endl;
+    cout << "2. Subjects Faculty" << endl;
+    cout << "3. ISE Marks " << endl;
+    cout << "4. Student Scorecard" << endl;
+    cout << "5. Back to Login" << endl;
+   // getline(cin, module);
+    cin >> module;
+    switch (module)
+    {
+    case 1:
+        system("CLS");
+        o1.calender();
+        break;
+
+    case 2:
+        system("CLS");
+        o1.faculty();
+        break;
+
+    case 3:
+        system("CLS");
+        o1.ise();
+        break;
+
+    case 4:
+        system("CLS");
+        o1.scorecard();
+        break;
+
+    case 5:
+        system("CLS");
+        login();
+        break;
+    }
+}
+
+int main()
+{
+   // system("colour D0");
+    system("color F0");
+    Module o1;
+    login();
+    return 0;
+}
